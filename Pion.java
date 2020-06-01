@@ -15,6 +15,7 @@ public class Pion
     private final int mvtPrise=2;//amplitude mouvement horizontal et vertical autorisé pour une prise
 
     private CouleurPion couleur;//blanc, noir
+    
 
     public Pion(CouleurPion couleur)
     {
