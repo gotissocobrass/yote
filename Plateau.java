@@ -220,22 +220,21 @@ public class Plateau extends JPanel
 
     
     public int coupValide(Case dep, Case arr) // deplacementValide
-    {//Teste si la Pion qui est en dep peut dSe deplacer en arr : renvoie 0 si deplacement interdit, 1 si deplacement valide, 2 si prise valide
+    {//Teste si la Pion qui est en dep peut de deplacer en arr : renvoie 0 si deplacement interdit, 1 si deplacement valide, 2 si prise valide
 
         // verifier que les casse sont sur le plateau 
         if (isIn(arr))
         {
-            // savoir si le cout est un deplacement de la reserve au plateau
-            //rajouter pour les deplacements 
-            if  (dep.getTypeCase() == 1 && arr.getTypeCase()==0)
-            {
-                return 1;
-            }
+        	 if(dep.getTypeCase()==1 &&	arr.getTypeCase()==0 )
+             {
+                 return 1;
+             }     
             // savoir si  c'est un deplacement horizontale ou pas 
-            else if (dep.getOrdonnee() == arr.getOrdonnee())
+            if (dep.getOrdonnee() == arr.getOrdonnee())
             {
                 // savoir manger ou deplacer
-                if (Yote.abs(dep.getOrdonnee() - arr.getOrdonnee())>= 2) // supose que si deplacement sup 2 cest pour manger
+            	
+            	  if (Yote.abs(dep.getOrdonnee() - arr.getOrdonnee())>= 2) // supose que si deplacement sup 2 cest pour manger
                 {
                     if (verifieDeplacementVertPrise(dep,arr))
                     {
@@ -252,7 +251,7 @@ public class Plateau extends JPanel
                     {
                         return 1;
                     }
-                    else
+               else
                     {
                         return 0;
                     }
@@ -284,10 +283,9 @@ public class Plateau extends JPanel
                 }  
             }
             
-            else
-            {
-                return 0;
-            }           
+            else {
+            	return 0;
+            }
         }
         else
         {
@@ -300,10 +298,10 @@ public class Plateau extends JPanel
 	if (coupValide (dep, arr) == 1)
         {
             // deplacer le pion
-            this.monPlateau[arr.getOrdonnee()][arr.getAbscisse()] = this.monPlateau[dep.getOrdonnee()][dep.getAbscisse()] ;
-            this.monPlateau[dep.getOrdonnee()][dep.getAbscisse()] = null;
-            arr.setPion(dep.getPion());
+			arr.setPion(dep.getPion());
+			
             dep.setPion(null);
+          
             return true;
         }
         

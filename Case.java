@@ -36,14 +36,14 @@ public class Case extends JButton implements ActionListener {
 	this.setBackground(couleur);
         if (typeCase == 0)
             this.setPreferredSize(new Dimension(100, 100));
-        else
+        else 
             this.setPreferredSize(new Dimension(50, 50));
         
         addActionListener(this);
         this.couleurFond = couleur;
         this.abscisse = abs;
         this.ordonnee = ord;
-        this.typeCase = typeCase;
+        this.typeCase=typeCase;
     }
 
     public Pion getPion() 
@@ -56,23 +56,22 @@ public class Case extends JButton implements ActionListener {
         this.pion = p;
         // si null alors rien
         //sinon image
-        // afiage
+        // afichage
         if (p != null) 
         {
             this.pion = p;
             this.occupe = true;
-            System.out.println(p.toString());
             if (p.getCouleur() == CouleurPion.blanc)
             {
                 // a modifier le chemin
-                imagePion = new ImageIcon("C:\\Users\\Public\\Documents\\projet_java\\source_projet\\source_projet\\Icones\\zebre.png");
+                imagePion = new ImageIcon("C:\\Users\\Sylvain Charlot\\Desktop\\projet_java\\zebre.png");
             }
             else
             {
                 // a modifier le chemin
-                imagePion = new ImageIcon("C:\\Users\\Public\\Documents\\projet_java\\source_projet\\source_projet\\Icones\\guepard.png");
+                imagePion = new ImageIcon("C:\\Users\\Sylvain Charlot\\Desktop\\projet_java\\guepard.png");
             }
-            System.out.println("ici");
+           
             this.setIcon(imagePion);
         } 
         else 
@@ -104,6 +103,7 @@ public class Case extends JButton implements ActionListener {
     {
         return this.ordonnee;
     }
+   
     public boolean isOccupe() 
     {
         return this.occupe;
@@ -113,8 +113,7 @@ public class Case extends JButton implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) 
     {
-        System.out.println(e);
-        System.out.println("Etat "+Yote.etat );
+
         if (Yote.etat == 0) 
         {
             // reactiver le bouton annuler
@@ -122,7 +121,7 @@ public class Case extends JButton implements ActionListener {
 
             // si on n'a pas encore selectionne de case de depart
             Yote.caseDep = ((Case) e.getSource());
-            System.out.println(Yote.caseDep);
+   
 			
            
             if (Yote.caseDep.isOccupe()) 
@@ -131,7 +130,7 @@ public class Case extends JButton implements ActionListener {
                 {
                     // si la case selectionne pour le depart du deplacement est valide : elle est occupee par une Pion de la couleur du joueur dont c'est le tour, on peut selectionner la case d'arrivee
                     Yote.caseDep.setBorder(Yote.redline);
-                    System.out.println("Yote.caseDep "+ Yote.caseDep);
+               
                     Yote.etat = 1;
                 }
             }
@@ -142,11 +141,11 @@ public class Case extends JButton implements ActionListener {
             {
 		// identification de la case possible d'arrivée
                 Yote.caseArr = ((Case) e.getSource());
-                System.out.println("Yote.caseArr " +Yote.caseArr.toString());
+      
                 if (Yote.unPlateau.isIn(Yote.caseArr)) 
                 {
 		    // la case selectionnee est differente de la case de depart
-                    if (Yote.caseDep.getTypeCase() == 1) 
+                    if (Yote.caseDep.getTypeCase() == 1) //est de la reserve de pion
                     {
                         if (!Yote.caseArr.isOccupe())
                             Yote.unPlateau.jouerCoup(Yote.caseDep, Yote.caseArr);
@@ -163,10 +162,7 @@ public class Case extends JButton implements ActionListener {
                     }
 		    else 
                     {
-                        System.out.println("Valeur renvoye : "+Yote.unPlateau.coupValide(Yote.caseDep, Yote.caseArr));
-			System.out.println(Yote.unPlateau.coupValide(Yote.caseDep, Yote.caseArr) == 1);
-			System.out.println(Yote.caseDep +" "+ Yote.caseArr);
-			
+         
                         if (Yote.unPlateau.coupValide(Yote.caseDep, Yote.caseArr) == 1) 
                         {
 			    Yote.unPlateau.jouerCoup(Yote.caseDep, Yote.caseArr);
