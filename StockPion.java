@@ -30,8 +30,9 @@ public class StockPion extends JPanel
         {
             for (int largueur = 0; largueur< this.monStockPion[longueur].length;largueur++)
             {
-                Case variable = new Case (black,largueur,longueur,1,true);
+                Case variable = new Case (black,largueur,longueur,1);
                 variable.setPion(piont1);
+                
                 this.monStockPion[longueur][largueur] = variable;
                 this.add(variable);
             } 
