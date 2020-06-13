@@ -27,6 +27,10 @@ public class Fenetre extends JFrame
     {
         super(name);// metre un nom a la fenetre
         this.setSize(2500, 2500); // taille de la fentre
+        //this.setLocationRelativeTo(null);// pour qu'elle soit centre au mileur
+        // On donne la possibilite de fermer la fenetre a laide de la croix en rouge
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setVisible(true);
     }
 
 
@@ -77,8 +81,10 @@ public class Fenetre extends JFrame
         score.setLayout(structureScore);
         Yote.scoreBlanc = new JLabel("Score Joueur Blanc \n "+ valueOf(Yote.nbPionBlanc));
         Yote.scoreNoir = new JLabel("Score Joueur Noir \n" + valueOf(Yote.nbPionNoir));
+        Yote.message = new JLabel("C'est au joueur "+Yote.joueur+" de jouer");
         score.add(Yote.scoreBlanc);
         score.add(Yote.scoreNoir);
+        score.add(Yote.message);
         pane.add(score, BorderLayout.SOUTH);
     }
 

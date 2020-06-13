@@ -35,6 +35,7 @@ public class Yote
     public static Fenetre fenetrePrincipale;
     public static JLabel scoreBlanc;
     public static JLabel scoreNoir;
+    public static JLabel message;
 
     public static int nbPionBlanc = 12;
     public static int nbPionNoir = 12;
@@ -46,21 +47,23 @@ public class Yote
     {//Retourne la valeur absolue de x
         return (x<0 ? -x : x);
     }
-
-    public static void main(String[] args) 
+    public static void Enicalisation_Jeu ()
     {
-
-	//Creation de la fenetre
-        fenetrePrincipale = new Fenetre("Jeu du Yoté");
-        // On donne la possibilite de fermer la fenetre
-        fenetrePrincipale.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        nbPionBlanc = 12;
+        nbPionNoir = 12;
+        joueur= CouleurPion.blanc;
         //ajouter les composants de la fenetre
         fenetrePrincipale.ajouterComposants(fenetrePrincipale.getContentPane());
         //affichage de la fenetre.
         fenetrePrincipale.pack();
-        fenetrePrincipale.setVisible(true);
-        joueur= CouleurPion.blanc;
+        
         etat =0;
-
+        
+    }
+    public static void main(String[] args) 
+    {
+	//Creation de la fenetre
+        fenetrePrincipale = new Fenetre("Jeu du Yoté");
+        Enicalisation_Jeu();
     }
 }

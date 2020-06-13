@@ -7,7 +7,7 @@ package projet_yote;
 
 /**
  *
- * @author Léa
+ * @author Léa LACOMBE
  */
 import javax.swing.*;
 import java.awt.*;
@@ -27,14 +27,15 @@ public class Plateau extends JPanel
     {
         this.setLayout(new GridLayout (6,5));
         this.monPlateau = new Case[6][5];
-        for (int longueur = 0; longueur< this.monPlateau.length;longueur++)
+        for (int longueur  = 0; longueur< this.monPlateau.length;longueur++)
         {
-            for (int largueur = 0; largueur< this.monPlateau[longueur].length;largueur++)
+            for (int  largueur= 0; largueur< this.monPlateau[longueur].length;largueur++)
             {
-                Case variable = new Case (gray,largueur,longueur,0,false);
+                Case variable = new Case (gray,largueur,longueur,0);
                 this.monPlateau[longueur][largueur] = variable;
-                this.add(variable);
+                this.add(variable); 
             } 
+
         }
 	// A completer
     }
@@ -62,7 +63,8 @@ public class Plateau extends JPanel
         if (isIn(arr)) // verifier que la casse arriver est sur le plateau 
         {
             // savoir le nombre de casse de deplacement 
-            if (dep.getAbscisse() > arr.getAbscisse())
+            
+            if (dep.getAbscisse()> arr.getAbscisse())
             {
                 Casse_voulons_se_deplacer = dep.getAbscisse() - arr.getAbscisse();
                 
@@ -76,6 +78,7 @@ public class Plateau extends JPanel
                 return false;
             }
             // compare au nombre de deplacement autorisé
+            
             if (Casse_voulons_se_deplacer == dep.getPion().getMvt())
             {
                 // savoir si c'est ocuper
@@ -96,7 +99,7 @@ public class Plateau extends JPanel
         if (isIn(arr))
         {
             // savoir le nombre de casse de deplacement 
-            if (dep.getOrdonnee() > arr.getOrdonnee())
+            if (dep.getOrdonnee()> arr.getOrdonnee())
             {
                 Casse_voulons_se_deplacer = dep.getOrdonnee() - arr.getOrdonnee();
                 
@@ -135,7 +138,8 @@ public class Plateau extends JPanel
         if (isIn(arr)) // est bien dans le plateau 
         {
             // savoir le nombre de casse de deplacement 
-            if (dep.getAbscisse() > arr.getAbscisse())
+            
+            if (dep.getAbscisse()> arr.getAbscisse())
             {
                 Casse_voulons_se_deplacer = dep.getAbscisse() - arr.getAbscisse();
                 valeur_abscique_casse_pion_manger = arr.getAbscisse()+1;
@@ -151,6 +155,7 @@ public class Plateau extends JPanel
                 return false;
             }
             // compare au nombre de deplacement autorisé
+            
             if (Casse_voulons_se_deplacer == dep.getPion().getMvtPrise())
             {
                 // savoir si c'est ocuper
@@ -160,6 +165,7 @@ public class Plateau extends JPanel
                 }
                 else
                 {
+                    
                     return this.monPlateau[arr.getOrdonnee()][valeur_abscique_casse_pion_manger].isOccupe();
                     // return true // si est occuper
                     // return false // pas de pion
@@ -177,20 +183,20 @@ public class Plateau extends JPanel
 	// deplacement pour manger un pion  horisontale
 	// A completer
         int Casse_voulons_se_deplacer;
-        int valeur_abscique_casse_pion_manger;
+        int valeur_Ordonnee_casse_pion_manger;
         if (isIn(arr)) // est bien dans le plateau 
         {
             // savoir le nombre de casse de deplacement 
             if (dep.getOrdonnee()> arr.getOrdonnee())
             {
                 Casse_voulons_se_deplacer = dep.getOrdonnee() - arr.getOrdonnee();
-                valeur_abscique_casse_pion_manger = arr.getOrdonnee()+1;
+                valeur_Ordonnee_casse_pion_manger = arr.getOrdonnee()+1;
                 
             }
             else if ((dep.getOrdonnee() < arr.getOrdonnee()))
             {
                 Casse_voulons_se_deplacer =  arr.getOrdonnee()- dep.getOrdonnee();
-                valeur_abscique_casse_pion_manger = arr.getOrdonnee()-1;
+                valeur_Ordonnee_casse_pion_manger = arr.getOrdonnee()-1;
             }
             else
             {
@@ -206,7 +212,7 @@ public class Plateau extends JPanel
                 }
                 else
                 {
-                    return this.monPlateau[valeur_abscique_casse_pion_manger][arr.getAbscisse()].isOccupe();
+                    return this.monPlateau[valeur_Ordonnee_casse_pion_manger][arr.getAbscisse()].isOccupe();
                 }
             }
             else
@@ -220,7 +226,7 @@ public class Plateau extends JPanel
 
     
     public int coupValide(Case dep, Case arr) // deplacementValide
-    {//Teste si la Pion qui est en dep peut dSe deplacer en arr : renvoie 0 si deplacement interdit, 1 si deplacement valide, 2 si prise valide
+    {//Teste si la Pion qui est en dep peut de deplacer en arr : renvoie 0 si deplacement interdit, 1 si deplacement valide, 2 si prise valide
 
         // verifier que les casse sont sur le plateau 
         if (isIn(arr))
@@ -232,8 +238,10 @@ public class Plateau extends JPanel
                 return 1;
             }
             // savoir si  c'est un deplacement horizontale ou pas 
-            else if (dep.getOrdonnee() == arr.getOrdonnee())
+            
+            else if (dep.getAbscisse() == arr.getAbscisse())
             {
+                
                 // savoir manger ou deplacer
                 if (Yote.abs(dep.getOrdonnee() - arr.getOrdonnee())>= 2) // supose que si deplacement sup 2 cest pour manger
                 {
@@ -258,11 +266,13 @@ public class Plateau extends JPanel
                     }
                 }  
             }
-            else if (dep.getAbscisse() == arr.getAbscisse()) // deplacement vertical
+            else if (dep.getOrdonnee() == arr.getOrdonnee()) // deplacement vertical
             {
-                if (Yote.abs(dep.getAbscisse() - arr.getAbscisse())>= 2) // supose que si deplacement sup 2 cest pour manger
+                
+                if (Yote.abs(dep.getAbscisse()- arr.getAbscisse())>= 2) // supose que si deplacement sup 2 cest pour manger
                 {
-                   if (verifieDeplacementVertPrise(dep,arr))
+                    
+                   if (verifieDeplacementHorPrise(dep,arr))
                     {
                         return 2;
                     }
@@ -273,7 +283,8 @@ public class Plateau extends JPanel
                 }
                 else // deplacer
                 {
-                    if (verifieDeplacementVert(dep,arr))
+                    
+                    if (verifieDeplacementHor(dep,arr))
                     {
                         return 1;
                     }
@@ -300,10 +311,14 @@ public class Plateau extends JPanel
 	if (coupValide (dep, arr) == 1)
         {
             // deplacer le pion
-            this.monPlateau[arr.getOrdonnee()][arr.getAbscisse()] = this.monPlateau[dep.getOrdonnee()][dep.getAbscisse()] ;
-            this.monPlateau[dep.getOrdonnee()][dep.getAbscisse()] = null;
+            // a voir pour le retire
+            //this.monPlateau[arr.getOrdonnee()][arr.getAbscisse()] = this.monPlateau[dep.getOrdonnee()][dep.getAbscisse()] ;
+            //this.monPlateau[dep.getOrdonnee()][dep.getAbscisse()] = null;
+            // ou pas
+            
             arr.setPion(dep.getPion());
             dep.setPion(null);
+            
             return true;
         }
         
@@ -318,15 +333,22 @@ public class Plateau extends JPanel
        if (coupValide (dep, arr) == 2)
         {
             // deplacer le pion
-            this.monPlateau[arr.getOrdonnee()][arr.getAbscisse()] = this.monPlateau[dep.getOrdonnee()][dep.getAbscisse()] ;
-            this.monPlateau[dep.getOrdonnee()][dep.getAbscisse()] = null; // vide
+            // peut etre a retire
+            //this.monPlateau[arr.getOrdonnee()][arr.getAbscisse()] = this.monPlateau[dep.getOrdonnee()][dep.getAbscisse()] ;
+            //this.monPlateau[dep.getOrdonnee()][dep.getAbscisse()] = null; // vide
+            //
+            
+            
             // mange le pion 
             // save pion manger
-            Case pion_manger = casePrise(dep, arr);
+            Case pion_manger = casePrise(dep, arr); // bizar yote. la case manger / on a donc deux vvariable
             // sup
-            this.monPlateau[pion_manger.getOrdonnee()][pion_manger.getAbscisse()] = null; // vide
+            //this.monPlateau[pion_manger.getOrdonnee()][pion_manger.getAbscisse()] = null; // vide
             // va le chercher un deuxieme
                 // a modifier
+            arr.setPion(dep.getPion());
+            dep.setPion(null);
+            pion_manger.setPion(null); // pion est manger
             return true;
         }
         else
@@ -345,8 +367,14 @@ public class Plateau extends JPanel
 
     public void reinitialiser() 
     {
-	// A completer
-        // revenir au debut 
+        // a modifier // les pionts reaperesse quand on passe la souris // peux plus manger
+        //System.exit(0);//ferme ihm et l'arret
+        
+        //Yote.fenetrePrincipale.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE );par raport a la croix rouche
+        //Yote.fenetrePrincipale = new Fenetre("Jeu du Yoté");
+        //Yote.Enicalisation_Jeu();
+        
+        System.out.println("ici"); // pas une fois // je croix qui il y a deux plateau au meme endroit 
     }
 
     public Case casePrise(Case dep, Case arr)
