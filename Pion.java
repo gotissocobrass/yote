@@ -7,41 +7,54 @@ package projet_yote;
 
 /**
  *
- * @author Léa
+ * @author Léa Lacombe
  */
 public class Pion
 {
     private final int mvt=1;//amplitude mouvement horizontal et vertical autorisé pour un déplacement
     private final int mvtPrise=2;//amplitude mouvement horizontal et vertical autorisé pour une prise
 
-    private CouleurPion couleur;//blanc, noir
+    private CouleurPion couleur;//blanc, noir determine le joueur
 
+    /**
+     *
+     * @param couleur // 0 au joueur blanc, 1 au joueur noir
+     */
     public Pion(CouleurPion couleur)
     {
         this.couleur = couleur;
     }
     
+    /**
+     *
+     * @return le nombre de mouvement de case autorise pour ce deplacer
+     */
     public int getMvt() 
     {
-	//A completer
         return this.mvt;
     }
+
+    /**
+     *
+     * @return le nombre de mouvement de case autorise pour manger
+     */
     public int getMvtPrise() 
     {
-	//A completer
         return this.mvtPrise;
     }
 
+    /**
+     *
+     * @return pour conaitre la couleur du pion
+     */
     public CouleurPion getCouleur() 
     {
-        //A completer
         return this.couleur;
     }
 
     @Override
     public String toString()
     {
-        //A completer
         String message = "Le joueur " + this.getCouleur();
         message = message + "\nMouvement de deplacement autorisisé = " + this.getMvt();
         message = message + "\nMouvement de deplacement pour manger son aversére = " + this.getMvtPrise();

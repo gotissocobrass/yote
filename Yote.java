@@ -7,60 +7,146 @@ package projet_yote;
 
 /**
  *
- * @author Léa
+ * @author Léa LACOMBE
  */
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
+/**
+ *
+ * @author Léa LACOMBE
+ */
 public class Yote
 {
+
+    /**
+     *
+     */
     public static int etat; // 0 au tour du joueur de selectionner sa piece,  1 en attente de la destination, 2 en attente de la selection du deuxième pion à prendre
+
+    /**
+     *
+     */
     public static CouleurPion joueur ; // 0 au joueur blanc, 1 au joueur noir
 
+    /**
+     *
+     */
     public static Case caseDep; // case de depart
+
+    /**
+     *
+     */
     public static Case caseArr; // case de arrive
+
+    /**
+     *
+     */
     public static Case casePrise; // case manger
 
+    /**
+     *
+     */
+    public static Coup derniercoup= new Coup(); // enregistre le dernier coup du joueur
     
-
+    /**
+     *
+     */
     public static Plateau unPlateau;
+
+    /**
+     *
+     */
     public static StockPion stockBlanc;
+
+    /**
+     *
+     */
     public static StockPion stockNoir;
 
+    /**
+     *
+     */
     public static Border redline = BorderFactory.createLineBorder(Color.red, 10, false);
+
+    /**
+     *
+     */
     public static Border empty = BorderFactory.createEmptyBorder();
     
-    
-    public static Fenetre fenetrePrincipale;
+    /**
+     *
+     */
+    public static Fenetre fenetrePrincipale = null;
+
+    /**
+     *
+     */
     public static JLabel scoreBlanc;
+
+    /**
+     *
+     */
     public static JLabel scoreNoir;
 
+    /**
+     *
+     */
+    public static JLabel message;
+
+    /**
+     *
+     */
     public static int nbPionBlanc = 12;
+
+    /**
+     *
+     */
     public static int nbPionNoir = 12;
     
-
-    
-    
+    /**
+     *
+     * @param x
+     * @return
+     */
     public static int abs(int x) 
     {//Retourne la valeur absolue de x
         return (x<0 ? -x : x);
     }
 
-    public static void main(String[] args) 
+    /**
+     *
+     */
+    public static void initialisation_Jeu ()
     {
-
-	//Creation de la fenetre
-        fenetrePrincipale = new Fenetre("Jeu du Yoté");
-        // On donne la possibilite de fermer la fenetre
-        fenetrePrincipale.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // initialisation le jeu Yote 
+        nbPionBlanc = 12; // nbr de pion au debut
+        nbPionNoir = 12; // nbr de pion au debut
+        joueur= CouleurPion.blanc;
+        
+        //Creation de la fenetre
+        if ( fenetrePrincipale != null )
+        {
+            fenetrePrincipale.getContentPane().removeAll(); // efface le contenu de IHM
+        }
+        else
+        {
+            fenetrePrincipale = new Fenetre("Jeu du Yoté");//Creation de la fenetre
+        }
         //ajouter les composants de la fenetre
         fenetrePrincipale.ajouterComposants(fenetrePrincipale.getContentPane());
         //affichage de la fenetre.
         fenetrePrincipale.pack();
-        fenetrePrincipale.setVisible(true);
-        joueur= CouleurPion.blanc;
         etat =0;
+    }
 
+    /**
+     *
+     * @param args
+     */
+    public static void main(String[] args) 
+    {
+        initialisation_Jeu();
     }
 }

@@ -7,7 +7,7 @@ package projet_yote;
 
 /**
  *
- * @author Léa LACOMBE
+ * @author Léa LACOMBE (modifier)
  */
 import javax.swing.*;
 import java.awt.*;
@@ -16,20 +16,39 @@ import java.awt.event.ActionListener;
 
 import static java.lang.String.valueOf;
 
-
+/**
+ *
+ * @author Léa LACOMBE (modifier)
+ */
 public class Fenetre extends JFrame 
 {
 
+    /**
+     *
+     */
     public static JButton boutonAnnuler = new JButton("Annuler");
+
+    /**
+     *
+     */
     public static JButton boutonReinit = new JButton("Reinitialiser");
 
+    /**
+     *
+     * @param name de la fentre
+     */
     public Fenetre(String name) 
     {
         super(name);// metre un nom a la fenetre
         this.setSize(2500, 2500); // taille de la fentre
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setVisible(true);
     }
 
-
+    /**
+     *
+     * @param pane
+     */
     public void ajouterComposants(final Container pane) 
     {
         FlowLayout structureBouton = new FlowLayout(FlowLayout.CENTER);// bouton
@@ -40,6 +59,7 @@ public class Fenetre extends JFrame
         JPanel fondBouton = new JPanel();
         fondBouton.setLayout(structureBouton);
         fondBouton.add(boutonAnnuler);
+        Fenetre.boutonAnnuler.setEnabled(false);
         fondBouton.add(boutonReinit);
 
         //Définition de l'action du bouton Annuler
@@ -65,8 +85,8 @@ public class Fenetre extends JFrame
         JPanel fondPlateau = new JPanel();
         fondPlateau.setLayout(structurePlateau);
 
-        Yote.unPlateau = new Plateau();
-        Yote.stockBlanc = new StockPion(CouleurPion.blanc);
+        Yote.unPlateau = new Plateau(); // cree un plateau de jeu
+        Yote.stockBlanc = new StockPion(CouleurPion.blanc); // nombre de poin
         Yote.stockNoir = new StockPion(CouleurPion.noir);
         fondPlateau.add(Yote.stockBlanc);
         fondPlateau.add(Yote.unPlateau);
@@ -77,8 +97,10 @@ public class Fenetre extends JFrame
         score.setLayout(structureScore);
         Yote.scoreBlanc = new JLabel("Score Joueur Blanc \n "+ valueOf(Yote.nbPionBlanc));
         Yote.scoreNoir = new JLabel("Score Joueur Noir \n" + valueOf(Yote.nbPionNoir));
+        Yote.message = new JLabel("C'est au joueur "+Yote.joueur+" de jouer");
         score.add(Yote.scoreBlanc);
         score.add(Yote.scoreNoir);
+        score.add(Yote.message);
         pane.add(score, BorderLayout.SOUTH);
     }
 
